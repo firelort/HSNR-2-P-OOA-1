@@ -4,29 +4,14 @@
 
 #ifndef OOA_PQUEUE_H
 #define OOA_PQUEUE_H
-static typedef struct pqentry{
-    float priority; // Definiert die Priorität eines Eintrages
-    char* string;
-    int id; //Gibt die Unique ID eines Eintrages an.
-    struct pqentry *last;
-    struct pqentry *next;
-}pqentry_t;
 
-typedef struct priorityqueue{
-    int size;
+typedef struct priorityqueue priorityqueue_t;
 
-
-}priorityqueue_t;
-
-
-
-priorityqueue_t* pqueue_create() {
-
-}
-void pqueue_insert(priorityqueue_t *priorityqueue, char* value, float priority);
-char* pqueue_extractMin(priorityqueue_t *priorityqueue);
-void pqueue_decreaseKey(priorityqueue_t *priorityqueue, char* value, float priority);
-void pqueue_remove(priorityqueue_t *priorityqueue, char* value);
-void pqueue_destroy(priorityqueue_t *priorityqueue);
+priorityqueue_t* pqueueCreate();
+void pqueueInsert(priorityqueue_t *priorityqueue, char* value, float priority);
+char* pqueueExtractMin(priorityqueue_t *priorityqueue);
+void pqueueDecreaseKey(priorityqueue_t *priorityqueue, char* value, float priority);
+void pqueueRemove(priorityqueue_t *priorityqueue, char* value);
+void pqueueDestroy(priorityqueue_t *priorityqueue);
 
 #endif //OOA_PQUEUE_H
