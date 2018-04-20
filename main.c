@@ -1,5 +1,5 @@
 //
-// Copied from the template and slightly added.
+// Copied from the template and slightly added. Version 1.0
 //
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,6 +14,7 @@ char* randomString(int size) {
         str[i] = (char) ((rand() % 26) + 'A');
     }
     str[size] = '\0';
+    return str;
 }
 
 int main() {
@@ -27,7 +28,7 @@ int main() {
     }
     priorityqueue_t *pq = pqueueCreate();
     tic = clock();
-    for (int i = 0; i < MAX; i++) {
+    for (i = 0; i < MAX; i++) {
         pqueueInsert(pq, strings[i], rand() % 100);
     }
     toc = clock();
@@ -41,7 +42,7 @@ int main() {
     }
     toc = clock();
 
-    printf("Extract time: %.10f\n", (float)((toc-tic) / CLOCKS_PER_SEC));
+    printf("Extract time: %.10f\n", (float)(toc-tic) / CLOCKS_PER_SEC);
     printf("Debugger: Tic: %f - Toc: %f\n", (float) tic / CLOCKS_PER_SEC, (float) toc / CLOCKS_PER_SEC); //Added for debugging reasons
     pqueueDestroy(pq);
     for (i = 0; i < MAX; i++) {

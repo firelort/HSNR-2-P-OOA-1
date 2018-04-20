@@ -1,5 +1,5 @@
 //
-// Created by Robert Hartings and Lars .... .
+// Created by Robert Hartings and Lars .... . Version 1.0
 //
 #include <stdlib.h>
 #include <stdio.h>
@@ -127,7 +127,7 @@ void pqueueDecreaseKey(priorityqueue_t *priorityqueue, char* value, float priori
     pqueueInsert(priorityqueue, value, priority);
 }
 
-void pqueueDestroy(priorityqueue_t *priorityqueue) { //TODO: Werden die Entrys wirklich geleert?
+void pqueueDestroy(priorityqueue_t *priorityqueue) {
     pqentry_t *tempEntry = priorityqueue->head;
     while (tempEntry->next != NULL) { // Before the queue is deleted, all elements in it are deleted.
         priorityqueue->head = tempEntry->next;
