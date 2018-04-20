@@ -1,5 +1,5 @@
 //
-// Created by hartings on 19.04.18.
+// Created by Robert Hartings and Lars ... .
 //
 
 #ifndef OOA_PQUEUE_H

@@ -1,3 +1,6 @@
+//
+// Copied from the template and slightly added.
+//
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -6,9 +9,9 @@
 #define MAX 1000
 
 char* randomString(int size) {
-    char *str = (char *) malloc((size + 1)*sizeof(char));
+    char *str = (char *) malloc((size + 1) * sizeof(char));
     for (int i = 0; i < size; i++) {
-        str[i] = (rand() % 26) + 'A';
+        str[i] = (char) ((rand() % 26) + 'A');
     }
     str[size] = '\0';
 }
@@ -19,11 +22,9 @@ int main() {
     clock_t tic, toc;
 
     srand(time(NULL));
-    printf("DEBUG\n");
     for (i = 0; i < MAX; i++) {
         strings[i] = randomString(8);
     }
-    printf("DEBUG 1.1\n");
     priorityqueue_t *pq = pqueueCreate();
     tic = clock();
     for (int i = 0; i < MAX; i++) {
@@ -31,7 +32,8 @@ int main() {
     }
     toc = clock();
 
-    printf("Insertion time: %.2f\n",(float)(tic-toc)/CLOCKS_PER_SEC);
+    printf("Insertion time: %.10f\n",(float)(toc-tic)/CLOCKS_PER_SEC);
+    printf("Debugger: Tic: %f - Toc: %f\n", (float) tic / CLOCKS_PER_SEC, (float) toc / CLOCKS_PER_SEC); //Added for debugging reasons
 
     tic = clock();
     for (i = 0; i < MAX; i++) {
@@ -39,11 +41,12 @@ int main() {
     }
     toc = clock();
 
-    printf("Extract time: %2.f\n", (float)(tic-toc) / CLOCKS_PER_SEC);
-
+    printf("Extract time: %.10f\n", (float)((toc-tic) / CLOCKS_PER_SEC));
+    printf("Debugger: Tic: %f - Toc: %f\n", (float) tic / CLOCKS_PER_SEC, (float) toc / CLOCKS_PER_SEC); //Added for debugging reasons
+    pqueueDestroy(pq);
     for (i = 0; i < MAX; i++) {
         free(strings[i]);
     }
-    pqueueDestroy(pq);
+
     return 0;
 }
