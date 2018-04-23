@@ -1,5 +1,5 @@
 //
-// Created by Robert Hartings and Lars ... . Version 1.0
+// Created by Robert Hartings and Lars Zeidler.
 //
 
 #ifndef OOA_PQUEUE_H
