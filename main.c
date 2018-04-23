@@ -7,6 +7,7 @@
 #include "pqueue.h"
 
 #define MAX 1000
+#define TestC 10
 
 char* randomString(int size) {
     char *str = (char *) malloc((size + 1) * sizeof(char));
@@ -17,7 +18,23 @@ char* randomString(int size) {
     return str;
 }
 
+void testFunction() {
+    int i;
+    srand(time(NULL));
+    priorityqueue_t *pqTest, *pq = pqueueCreate();
+    // Test 1: Kein Element in der Wartschlange
+    pqueueExtractMin(pq);
+    // Test 2: Element removen was nicht vorhanden ist.
+    pqueueRemove(pq, "Hello");
+    // Test 3:
+    pqueueDecreaseKey(pq, "Hello", 20);
+    // Test 4:
+    pqueueDestroy(pqTest);
+
+}
+
 int main() {
+    testFunction();
     int i;
     char *strings[MAX];
     clock_t tic, toc;

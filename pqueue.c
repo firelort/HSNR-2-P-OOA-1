@@ -24,7 +24,7 @@ typedef struct priorityqueue{
 priorityqueue_t *pqueueCreate() {
     priorityqueue_t *pqueue = (priorityqueue_t *) malloc(sizeof(priorityqueue_t));
     if (pqueue == NULL) {
-        printf("Error 1: Program couldn't allocate memory for priority queue.");
+        printf("Error 1: Program couldn't allocate memory for priority queue.\n");
     } else {
         pqueue->idCounter = 0;
         pqueue->size = 0;
@@ -37,7 +37,7 @@ void pqueueInsert(priorityqueue_t *priorityqueue, char* value, float priority) {
     pqentry_t *newElement = (pqentry_t *) malloc(sizeof(pqentry_t));
     pqentry_t *tempElement;
     if (!newElement) {
-        printf("Error 2: Program couldn't allocate memory for a new entry.");
+        printf("Error 2: Program couldn't allocate memory for a new entry.\n");
         return;
     }
     newElement->string = value;
@@ -79,7 +79,7 @@ char* pqueueExtractMin(priorityqueue_t *priorityqueue) {
     if(priorityqueue->size) {
         rtrnValue = priorityqueue->head->string;
     } else {
-        printf("Error 3: Priority queue has no entries or wrong priority queue specified.");
+        printf("Error 3: Priority queue has no entries or wrong priority queue specified.\n");
         rtrnValue = "Error";
     }
     return rtrnValue;
@@ -87,7 +87,7 @@ char* pqueueExtractMin(priorityqueue_t *priorityqueue) {
 
 void pqueueRemove(priorityqueue_t *priorityqueue, char* value) {
     if (priorityqueue->size == 0) { // Queue is empty
-        printf("Error 4: Priority queue is emtpy.");
+        printf("Error 4: Priority queue is emtpy.\n");
         return;
     } else if (priorityqueue->size == 1) { // Queue only has one element
         if(strcmp(priorityqueue->head->string, value) == 0) { // strcmp returns 0, if both strings are identical
@@ -96,7 +96,7 @@ void pqueueRemove(priorityqueue_t *priorityqueue, char* value) {
             priorityqueue->head = NULL;
             priorityqueue->tail = NULL;
         } else { // The only element wasn't searched for
-            printf("Error 5: Specified value not found.");
+            printf("Error 5: Specified value not found.\n");
         }
         return;
     }
@@ -114,7 +114,7 @@ void pqueueRemove(priorityqueue_t *priorityqueue, char* value) {
             tempEntry = tempEntry->next;
         }
         if (tempEntry->next == NULL) {
-            printf("Error 6: The element you were looking for wasn't found.");
+            printf("Error 6: The element you were looking for wasn't found.\n");
         }
         tempEntry->prev->next = tempEntry->next;
         tempEntry->next->prev = tempEntry->prev;
@@ -128,12 +128,15 @@ void pqueueDecreaseKey(priorityqueue_t *priorityqueue, char* value, float priori
 }
 
 void pqueueDestroy(priorityqueue_t *priorityqueue) {
-    pqentry_t *tempEntry = priorityqueue->head;
-    while (tempEntry->next != NULL) { // Before the queue is deleted, all elements in it are deleted.
-        priorityqueue->head = tempEntry->next;
-        free(tempEntry);
-        tempEntry = priorityqueue->head;
+    if (priorityqueue != NULL) {
+        pqentry_t *tempEntry;
+        while (priorityqueue->head != NULL) { // Before the queue is deleted, all elements in it are deleted.
+            tempEntry = priorityqueue->head->next;
+            free(priorityqueue->head);
+            priorityqueue->head = tempEntry;
+        }
+        free(priorityqueue);
+    } else {
+        printf("Error 7: No queue is specified.\n");
     }
-    free(tempEntry);
-    free(priorityqueue);
 }
