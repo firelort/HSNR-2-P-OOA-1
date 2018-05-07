@@ -78,6 +78,7 @@ char* pqueueExtractMin(priorityqueue_t *priorityqueue) {
     char *rtrnValue;
     if(priorityqueue->size) {
         rtrnValue = priorityqueue->head->string;
+        pqueueRemove(priorityqueue, rtrnValue);
     } else {
         printf("Error 3: Priority queue has no entries or wrong priority queue specified.\n");
         rtrnValue = "Error";
